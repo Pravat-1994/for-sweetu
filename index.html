@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Malkin — Bachu's Apology</title>
+
+<!-- Fonts: Cormorant Garamond (display serif, romantic & cinematic), Jost (clean body sans), Dancing Script (handwritten signature accent) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Ambient cursor hearts + floating ambient particles container (global, sits behind everything once unlocked) -->
+<div class="ambient-layer" id="ambientLayer" aria-hidden="true"></div>
+
+<!-- ============================================================ -->
+<!-- PASSWORD / LOCK SCREEN                                        -->
+<!-- ============================================================ -->
+<section id="lockScreen" class="lock-screen" aria-label="Locked message">
+  <div class="lock-bg">
+    <div class="lock-gradient"></div>
+    <div class="lock-hearts" id="lockHearts" aria-hidden="true"></div>
+  </div>
+
+  <div class="lock-card glass" role="dialog" aria-labelledby="lockHeading">
+    <p class="lock-eyebrow">a private letter</p>
+    <h1 id="lockHeading" class="lock-heading">❤️ A message only for my Malkin ❤️</h1>
+    <p class="lock-sub">Only the one who owns Bachu's heart can unlock this.</p>
+
+    <form id="lockForm" class="lock-form" autocomplete="off">
+      <label for="lockPassword" class="visually-hidden">Magic password</label>
+      <input type="password" id="lockPassword" class="lock-input" placeholder="Enter the magic password..." aria-describedby="lockHint">
+      <button type="submit" class="lock-btn">Unlock My Heart</button>
+    </form>
+    <p id="lockHint" class="lock-hint">hint: what you'd whisper after an apology</p>
+  </div>
+
+  <!-- Wrong password popup -->
+  <div id="wrongPopup" class="wrong-popup glass" role="alert">
+    <p class="wrong-title">Hmm... 🤍</p>
+    <p class="wrong-text">Bachu only belongs to one Malkin ❤️</p>
+  </div>
+
+  <!-- Correct password full-screen burst -->
+  <div id="unlockBurst" class="unlock-burst" aria-hidden="true"></div>
+</section>
+
+<!-- ============================================================ -->
+<!-- MAIN SITE (hidden until unlocked)                             -->
+<!-- ============================================================ -->
+<div id="mainSite" class="main-site" hidden>
+
+  <!-- Floating music control -->
+  <button id="muteBtn" class="mute-btn glass" aria-label="Toggle music">🔈</button>
+  <!-- Placeholder music track — replace src with your romantic instrumental file -->
+  <audio id="bgMusic" loop preload="none">
+    <source src="assets/Romantic Instrumental.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- progress / scroll heartbeat rail -->
+  <div class="scroll-rail" aria-hidden="true"><div class="scroll-rail-fill" id="scrollFill"></div></div>
+
+  <!-- ============================================================ -->
+  <!-- HERO                                                          -->
+  <!-- ============================================================ -->
+  <header class="hero" id="hero">
+    <div class="hero-bg">
+      <div class="hero-gradient"></div>
+      <div class="hero-hearts" id="heroHearts" aria-hidden="true"></div>
+      <div class="hero-sparkles" id="heroSparkles" aria-hidden="true"></div>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">for sweetu, from bachu</p>
+      <h1 class="hero-title">
+        <span class="hero-line">Dear Sweetu...</span>
+        <span class="hero-line hero-line-accent">I'm Sorry ❤️</span>
+      </h1>
+      <p class="hero-typing" id="heroTyping" aria-live="polite"></p>
+      <button class="btn-primary hero-btn" id="openHeartBtn">Open My Heart</button>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true"><span></span></div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 — ABOUT HER                                         -->
+  <!-- ============================================================ -->
+  <section class="section section-about" id="about">
+    <div class="section-inner about-grid">
+      <div class="about-photo-wrap reveal">
+        <div class="photo-heart-border">
+          <!-- Place Sweetu.jpeg in /assets — replace filename below if different -->
+          <img src="assets/Sweetu.jpeg" alt="Sweetu" class="about-photo" id="sweetuPhoto"
+               onerror="this.closest('.photo-heart-border').classList.add('img-fallback')">
+          <div class="img-fallback-label">Sweetu's photo goes here<br><span>assets/Sweetu.jpeg</span></div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <p class="section-eyebrow">the girl who owns bachu's heart</p>
+        <h2 class="section-title">Everything About You Is My Favourite Thing</h2>
+        <p>Sweetu, somewhere between your laugh and your silences, I found the softest place I know. You are beautiful in a way that has nothing to do with mirrors — the kind of beautiful that shows up in how gently you care for people, how fiercely you love the ones you choose.</p>
+        <p>You have carried me through my worst days without ever asking to be thanked for it. You remember the little things I forget about myself. You show up, even when I don't deserve it — and yesterday, I gave you every reason to stop. You didn't. That's who you are.</p>
+        <p>I am, without exaggeration, the luckiest man alive to be loved by my Malkin.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 — TIMELINE                                          -->
+  <!-- ============================================================ -->
+  <section class="section section-timeline" id="timeline">
+    <div class="section-inner">
+      <p class="section-eyebrow center">a story in three days</p>
+      <h2 class="section-title center">Yesterday. Today. Tomorrow.</h2>
+
+      <div class="timeline">
+        <div class="timeline-track" aria-hidden="true"></div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass">
+            <p class="timeline-label">Yesterday</p>
+            <p class="timeline-text">Bachu spoke rudely. Words left my mouth faster than my heart could stop them, and they landed somewhere they never should have — on you.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass">
+            <p class="timeline-label">Today</p>
+            <p class="timeline-text">He regrets every word. Every single one, replayed, unwanted, sitting heavy in my chest since the moment I said them.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card glass">
+            <p class="timeline-label">Tomorrow</p>
+            <p class="timeline-text">He promises to become better. Not perfect — better. Slower to speak, quicker to listen, and always gentle with your heart.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 — CRYBABY BACHU                                     -->
+  <!-- ============================================================ -->
+  <section class="section section-crybaby" id="crybaby">
+    <div class="rain-layer" id="rainLayer" aria-hidden="true"></div>
+    <div class="section-inner crybaby-grid">
+      <div class="crybaby-photo-wrap reveal">
+        <!-- Place Crybaby Bachu.jpeg in /assets -->
+        <img src="assets/Crybaby Bachu.jpeg" alt="Bachu, regretful" class="crybaby-photo" id="crybabyPhoto"
+             onerror="this.parentElement.classList.add('img-fallback')">
+        <div class="img-fallback-label">Bachu's photo goes here<br><span>assets/Crybaby Bachu.jpeg</span></div>
+      </div>
+      <div class="crybaby-quotes reveal">
+        <blockquote class="quote">
+          <p>"The biggest punishment isn't your anger...<br>It's seeing your smile disappear because of me."</p>
+        </blockquote>
+        <blockquote class="quote">
+          <p>"Bachu can fight the whole world...<br>But not Sweetu's silence."</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 — APOLOGY VIDEO                                     -->
+  <!-- ============================================================ -->
+  <section class="section section-video" id="videoSection">
+    <div class="section-inner center-col">
+      <p class="section-eyebrow center">watch, don't just read</p>
+      <h2 class="section-title center">My Apology Isn't Just Words...<br>It's From My Heart.</h2>
+
+      <div class="video-frame reveal">
+        <div class="video-hearts" aria-hidden="true"></div>
+        <!-- Place Apology Video.mp4 in /assets -->
+        <video id="apologyVideo" class="apology-video" controls preload="metadata" poster="">
+          <source src="assets/Apology Video.mp4" type="video/mp4">
+          Your browser does not support embedded video.
+        </video>
+        <div class="video-fallback" id="videoFallback">
+          <p>Your apology video goes here</p>
+          <span>assets/Apology Video.mp4</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 — EFFORTS                                           -->
+  <!-- ============================================================ -->
+  <section class="section section-effort" id="effort">
+    <div class="section-inner center-col">
+      <h2 class="section-title center">How Bachu Tries To Win Back His Sweetu ❤️</h2>
+
+      <div class="effort-card glass reveal">
+        <div class="effort-video-wrap">
+          <!-- Place Sorry Effort.mp4 in /assets -->
+          <video class="effort-video" controls preload="metadata">
+            <source src="assets/Sorry Effort.mp4" type="video/mp4">
+          </video>
+          <div class="video-fallback" id="effortFallback">
+            <p>Effort video goes here</p>
+            <span>assets/Sorry Effort.mp4</span>
+          </div>
+        </div>
+
+        <div class="chat-bubbles" aria-hidden="true">
+          <span class="bubble b1">sorry sweetu 🥺</span>
+          <span class="bubble b2">please talk to me</span>
+          <span class="bubble b3">I miss my Malkin</span>
+          <span class="bubble b4">I'll do better, promise</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 — REASONS I LOVE YOU                                -->
+  <!-- ============================================================ -->
+  <section class="section section-reasons" id="reasons">
+    <div class="section-inner">
+      <p class="section-eyebrow center">25 small truths</p>
+      <h2 class="section-title center">Reasons I Love My Sweetu</h2>
+      <div class="reasons-grid" id="reasonsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7 — PROMISES                                          -->
+  <!-- ============================================================ -->
+  <section class="section section-promises" id="promises">
+    <div class="section-inner center-col">
+      <p class="section-eyebrow center">not just sorry — a plan</p>
+      <h2 class="section-title center">My Promises To You</h2>
+      <div class="promises-list" id="promisesList"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 8 — LOVE METER                                        -->
+  <!-- ============================================================ -->
+  <section class="section section-meter" id="meter">
+    <div class="section-inner center-col">
+      <h2 class="section-title center">The Love Meter</h2>
+      <p class="meter-caption">press each one, and watch what happens to my heart</p>
+
+      <div class="meter-wrap glass">
+        <svg class="meter-ekg" viewBox="0 0 400 60" preserveAspectRatio="none" aria-hidden="true">
+          <polyline id="ekgLine" points="0,30 400,30" fill="none" stroke="var(--accent)" stroke-width="3"/>
+        </svg>
+        <div class="meter-bar-track">
+          <div class="meter-bar-fill" id="meterFill"></div>
+        </div>
+        <p class="meter-percent" id="meterPercent">10%</p>
+      </div>
+
+      <button class="btn-meter" id="meterBtn" data-step="0">I'm Really Sorry</button>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 9 — MEMORY WALL                                       -->
+  <!-- ============================================================ -->
+  <section class="section section-memory" id="memory">
+    <div class="section-inner">
+      <p class="section-eyebrow center">us, in pieces</p>
+      <h2 class="section-title center">Memory Wall</h2>
+      <div class="polaroid-wall" id="polaroidWall"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 10 — THE LETTER                                       -->
+  <!-- ============================================================ -->
+  <section class="section section-letter" id="letterSection">
+    <div class="section-inner center-col">
+      <p class="section-eyebrow center">the last page</p>
+      <h2 class="section-title center">A Letter To My Malkin</h2>
+
+      <div class="letter-paper reveal" id="letterPaper">
+        <p id="letterText" class="letter-text"></p>
+        <p class="letter-signature">Forever your, <span>Bachu</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FINAL SECTION                                                 -->
+  <!-- ============================================================ -->
+  <section class="section section-final" id="finalSection">
+    <div class="final-heart-glow" aria-hidden="true">
+      <svg viewBox="0 0 200 180" class="final-heart-svg">
+        <path d="M100,170 C40,120 0,80 0,45 C0,15 25,0 50,0 C70,0 90,12 100,35 C110,12 130,0 150,0 C175,0 200,15 200,45 C200,80 160,120 100,170 Z" fill="url(#finalHeartGrad)"/>
+        <defs>
+          <radialGradient id="finalHeartGrad" cx="50%" cy="35%" r="70%">
+            <stop offset="0%" stop-color="#FFD700"/>
+            <stop offset="55%" stop-color="#FF5C8A"/>
+            <stop offset="100%" stop-color="#500000"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="final-content">
+      <p class="final-name">Sweetu...</p>
+      <p class="final-text">I'm not asking you to forget yesterday...<br>
+      I'm asking for one more chance to make tomorrow beautiful.</p>
+      <p class="final-text">Because my happiest place has always been beside you.</p>
+      <p class="final-sign">Forever your Bachu ❤️</p>
+
+      <button class="btn-forgive" id="forgiveBtn">Forgive Your Bachu ❤️</button>
+
+      <div class="thank-you" id="thankYou" hidden>
+        <p class="thank-line">❤️ Thank You Malkin ❤️</p>
+        <p class="thank-line-sub">I Love You Forever ❤️</p>
+      </div>
+    </div>
+
+    <canvas id="fireworksCanvas" class="fireworks-canvas" aria-hidden="true"></canvas>
+  </section>
+
+  <!-- Easter egg toast -->
+  <div id="eggToast" class="egg-toast glass" hidden></div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
