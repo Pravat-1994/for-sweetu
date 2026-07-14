@@ -415,10 +415,10 @@
      Section 9: Memory wall polaroids
   --------------------------------------------------------------- */
   const POLAROID_ITEMS = [
-    { src: 'Sweetu.jpeg', cap: 'my Malkin' },
-    { src: 'Bachu.jpeg', cap: 'your Bachu' },
-    { src: 'Sweetu.jpeg', cap: 'that smile' },
-    { src: 'Bachu.jpeg', cap: 'us, always' },
+    { src: 'BachuPic.jpeg', cap: 'your Bachu' },
+    { src: 'MalkinPic.jpeg', cap: 'my Malkin' },
+    { src: 'Malkin Smile.jpeg', cap: 'that smile' },
+    { src: 'Us Together.jpeg', cap: 'us, always' },
   ];
   function initPolaroids() {
     const wall = $('#polaroidWall');
